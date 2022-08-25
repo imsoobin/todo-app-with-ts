@@ -1,5 +1,16 @@
 import React from "react";
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Flex,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+  WrapItem,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -32,7 +43,7 @@ const Navbar = () => {
         </Link>
       </Box>
       <Box>
-        <Link to="/">
+        {/* <Link to="/">
           <Button
             fontWeight={["medium", "medium", "medium"]}
             fontSize={["xs", "sm", "lg", "xl"]}
@@ -43,7 +54,7 @@ const Navbar = () => {
           >
             Show todo list
           </Button>
-        </Link>
+        </Link> */}
         {/* <Link to="/add">
           <Button
             fontWeight={["medium", "medium", "medium"]}
@@ -56,6 +67,19 @@ const Navbar = () => {
             Add todo
           </Button>
         </Link> */}
+        <Menu>
+          <MenuButton>
+            <WrapItem>
+              <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
+            </WrapItem>
+          </MenuButton>
+          <MenuList bg={"rgb(26,32,44)"}>
+            <Link to={"/profile"}>
+              <MenuItem>Profile</MenuItem>
+            </Link>
+            <MenuItem>Logout</MenuItem>
+          </MenuList>
+        </Menu>
       </Box>
     </Flex>
   );

@@ -28,7 +28,9 @@ const TodoList: React.FC = () => {
         >
           <Heading color="white">Todo list</Heading>
           <Link to="/add">
-            <Button paddingX="3rem">Add</Button>
+            <Button paddingX="3rem" color={"#111"}>
+              Add
+            </Button>
           </Link>
         </Flex>
         {listTodo.length > 0 ? (

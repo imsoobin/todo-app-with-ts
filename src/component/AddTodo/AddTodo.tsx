@@ -18,6 +18,7 @@ import {
   fetchDataTodo,
   fetchUpdateItem,
 } from "../../redux/reducer/todoListSlice";
+import { Link } from "react-router-dom";
 // import { v4 as uuidv4 } from "uuid";
 
 const AddTodo: React.FC = () => {
@@ -54,7 +55,7 @@ const AddTodo: React.FC = () => {
       dispatch(fetchDataTodo());
       toast_success();
     } else toast_error();
-    
+
     setTitle("");
     setAuthor("");
     navigate("/");
@@ -79,7 +80,7 @@ const AddTodo: React.FC = () => {
   return (
     <>
       <Flex
-        height="100vh"
+        height="80vh"
         justifyContent="center"
         alignItems="center"
         flexDirection="column"
@@ -116,12 +117,17 @@ const AddTodo: React.FC = () => {
           </FormControl>
           <Button
             marginTop={4}
-            colorScheme="teal"
+            colorScheme="green"
             type="submit"
             onClick={handleOnSubmitAddTodo}
           >
             Submit
           </Button>
+          <Link to={"/"}>
+            <Button marginTop={4} marginLeft={2} colorScheme="teal">
+              Cancel
+            </Button>
+          </Link>
         </Box>
       </Flex>
     </>
