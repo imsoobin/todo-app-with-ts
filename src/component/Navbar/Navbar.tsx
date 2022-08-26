@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Avatar,
   Box,
@@ -11,9 +11,23 @@ import {
   Text,
   WrapItem,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const isAccount = localStorage.getItem("token");
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    if (isAccount) {
+      localStorage.removeItem("token");
+      window.location.reload();
+    }
+  };
+  useEffect(() => {
+    if (isAccount) {
+      return navigate("/");
+    }
+    // eslint-disable-next-line
+  }, [isAccount]);
   return (
     <Flex
       flexDirection="row"
@@ -67,19 +81,48 @@ const Navbar = () => {
             Add todo
           </Button>
         </Link> */}
-        <Menu>
-          <MenuButton>
-            <WrapItem>
-              <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
-            </WrapItem>
-          </MenuButton>
-          <MenuList bg={"rgb(26,32,44)"}>
-            <Link to={"/profile"}>
-              <MenuItem>Profile</MenuItem>
+        {isAccount ? (
+          <Menu>
+            <MenuButton>
+              <WrapItem>
+                <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
+              </WrapItem>
+            </MenuButton>
+            <MenuList bg={"rgb(26,32,44)"}>
+              <Link to={"/profile"}>
+                <MenuItem>Profile</MenuItem>
+              </Link>
+              <MenuItem onClick={handleLogOut}>Logout</MenuItem>
+            </MenuList>
+          </Menu>
+        ) : (
+          <Box>
+            <Link to={"/login"}>
+              <Button
+                fontWeight={["medium", "medium", "medium"]}
+                fontSize={["xs", "sm", "lg", "xl"]}
+                variant="ghost"
+                _hover={{ bg: "rgba(0,0,0,.2)" }}
+                p={[1, 4]}
+                color="white"
+              >
+                Login
+              </Button>
             </Link>
-            <MenuItem>Logout</MenuItem>
-          </MenuList>
-        </Menu>
+            <Link to={"/signup"}>
+              <Button
+                fontWeight={["medium", "medium", "medium"]}
+                fontSize={["xs", "sm", "lg", "xl"]}
+                variant="ghost"
+                _hover={{ bg: "rgba(0,0,0,.2)" }}
+                p={[1, 4]}
+                color="white"
+              >
+                SignUp
+              </Button>
+            </Link>
+          </Box>
+        )}
       </Box>
     </Flex>
   );

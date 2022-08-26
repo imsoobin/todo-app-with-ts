@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { TodoState } from '../model/type'
+import { LoginState, SignUpState, TodoState } from '../model/type'
 const HOST: string = 'http://localhost:1337'
 
 export const findTodoList = () => {
@@ -33,3 +33,17 @@ export const deleteTodoItem = (data: Partial<TodoState>) => {
     })
 }
 
+export const loginAccount = (data: Partial<LoginState>) => {
+    return axios({
+        url: HOST + '/DUser/login',
+        method: 'POST',
+        data
+    })
+}
+export const signupAccount = (data: Partial<LoginState & SignUpState>) => {
+    return axios({
+        url: HOST + '/DUser/signUp',
+        method: 'POST',
+        data
+    })
+}
