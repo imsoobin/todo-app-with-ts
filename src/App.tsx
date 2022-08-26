@@ -35,8 +35,9 @@ const App: React.FC = () => {
           <Route path="/" element={<TodoList />} />
           <Route path="/add" element={<AddTodo />} />
           <Route path="/update/:id" element={<AddTodo />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/todo/:signup" element={<SignUp />} />
+          <Route path="/todo/:login" element={<Login />} />
+          {/* <Route path="/todo/:query" element={<Login />} /> */}
         </Routes>
       </Suspense>
       {/* <form onSubmit={handleSubmit}>

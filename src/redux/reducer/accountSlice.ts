@@ -28,8 +28,6 @@ export const fetchLogin = createAsyncThunk('./fetchLogin', async (data: Partial<
 export const fetchSignUp = createAsyncThunk('./fetchSignUp', async (data: Partial<LoginState & SignUpState>) => {
     try {
         let rs = await signupAccount(data)
-        console.log(rs);
-        
         if (rs) {
             // localStorage.setItem('token', rs?.data?.token)
             return rs?.data

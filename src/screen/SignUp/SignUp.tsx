@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 import {
-  Box,
+  // Box,
   Button,
   FormControl,
-  FormLabel,
+  // FormLabel,
   Heading,
-  Input,
+  // Input,
   useToast,
 } from "@chakra-ui/react";
 import "./style.css";
-import { LoginState, SignUpState } from "../../model/type";
 import { useAppDispatch } from "../../hooks";
 import { fetchSignUp } from "../../redux/reducer/accountSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import DATA from "../../common/const/PAGE.json";
+import Widget from "../../widgets";
+// import { LoginState, SignUpState } from "../../model/type";
 //type sign up
-type signupType = LoginState & SignUpState;
+// type signupType = LoginState & SignUpState;
 
 const SignUp: React.FC = () => {
   const toast_success = useToast({
@@ -29,7 +31,10 @@ const SignUp: React.FC = () => {
   });
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [info, setInfo] = useState<signupType>();
+  const { signup } = useParams<{ signup: string }>();
+  const PAGE = DATA.find((fd) => fd.sid === signup);
+  
+  const [info, setInfo] = useState<Partial<any>>({});
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.currentTarget.name;
     const value = e.currentTarget.value;
@@ -60,57 +65,17 @@ const SignUp: React.FC = () => {
     <form className="form__signup" onSubmit={handleSubmit}>
       <FormControl isRequired width={"60%"}>
         <Heading>Form SignUp</Heading>
-        <Box>
-          <FormLabel className="form__label">User name</FormLabel>
-          <Input
-            value={info?.username}
-            name="username"
-            onChange={handleChange}
-            placeholder="user name"
-            autoComplete="off"
-          />
-        </Box>
-        <Box>
-          <FormLabel className="form__label">Email</FormLabel>
-          <Input
-            value={info?.email}
-            name="email"
-            type={'email'}
-            onChange={handleChange}
-            placeholder="Email"
-            autoComplete="off"
-          />
-        </Box>
-        <Box>
-          <FormLabel className="form__label">Phone</FormLabel>
-          <Input
-            value={info?.phone}
-            name="phone"
-            onChange={handleChange}
-            placeholder="phone number"
-            autoComplete="off"
-          />
-        </Box>
-        <Box>
-          <FormLabel className="form__label">Password</FormLabel>
-          <Input
-            value={info?.password}
-            name="password"
-            onChange={handleChange}
-            placeholder="pass"
-            autoComplete="off"
-          />
-        </Box>
-        {/* <Box>
-          <FormLabel className="form__label">Confirm password</FormLabel>
-          <Input
-            value={info?.confirmPassword}
-            name="confirm_password"
-            onChange={handleChange}
-            placeholder="confirm pass"
-            autoComplete="off"
-          />
-        </Box> */}
+        {PAGE?.schema?.map((sch: Partial<any>, key) => {
+          const Item = Widget[sch.widget];
+          return (
+            <Item
+              schema={sch}
+              key={key}
+              value={info[sch?.field]}
+              onChange={handleChange}
+            />
+          );
+        })}
         <Button mt={4} colorScheme="teal" type="submit">
           Submit
         </Button>

@@ -97,7 +97,7 @@ const Navbar = () => {
           </Menu>
         ) : (
           <Box>
-            <Link to={"/login"}>
+            <Link to={"/todo/login"}>
               <Button
                 fontWeight={["medium", "medium", "medium"]}
                 fontSize={["xs", "sm", "lg", "xl"]}
@@ -109,7 +109,7 @@ const Navbar = () => {
                 Login
               </Button>
             </Link>
-            <Link to={"/signup"}>
+            <Link to={"/todo/signup"}>
               <Button
                 fontWeight={["medium", "medium", "medium"]}
                 fontSize={["xs", "sm", "lg", "xl"]}

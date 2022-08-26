@@ -30,9 +30,8 @@ const AddTodo: React.FC = () => {
   });
   const toast_error = useToast({
     position: "top",
-    title: "Error",
     status: "error",
-    duration: 1000,
+    duration: 2000,
   });
 
   const dispatch = useAppDispatch();
@@ -51,10 +50,10 @@ const AddTodo: React.FC = () => {
   const handleUpdateTodoItem = async () => {
     // dispatch(updateTodoItem({ id: id!, title, author }));
     let rs: any = await dispatch(fetchUpdateItem({ id: id!, title, author }));
-    if (rs) {
+    if (rs?.payload === "Success") {
       dispatch(fetchDataTodo());
       toast_success();
-    } else toast_error();
+    } else toast_error({ title: rs?.payload });
 
     setTitle("");
     setAuthor("");
@@ -67,10 +66,10 @@ const AddTodo: React.FC = () => {
     }
     // dispatch(addTodoItem({ title, author, id: uuidv4() }));
     let rs: any = await dispatch(fetchAddItem({ title, author }));
-    if (rs) {
+    if (rs?.payload === "Success") {
       dispatch(fetchDataTodo());
       toast_success();
-    } else toast_error();
+    } else toast_error({ title: rs?.payload });
 
     setTitle("");
     setAuthor("");

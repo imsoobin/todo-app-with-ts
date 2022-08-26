@@ -20,9 +20,9 @@ export const fetchDataTodo = createAsyncThunk('/fetchDataTodo',
         try {
             let rs: any = await findTodoList()
             if (rs) return rs.data
-        } catch (error) {
+        } catch (error: any) {
             console.log(error);
-            return
+            return error.response.data
         }
     })
 
@@ -31,9 +31,9 @@ export const fetchAddItem = createAsyncThunk('/fetchAddItem',
         try {
             let rs = await createTodoItem(data)
             if (rs) return rs.data?.successMsg
-        } catch (error) {
+        } catch (error: any) {
             console.log(error);
-            return
+            return error.response.data
         }
     })
 
@@ -42,9 +42,9 @@ export const fetchUpdateItem = createAsyncThunk('/fetchUpdateItem',
         try {
             let rs = await updateTodoItem(data)
             if (rs) return rs.data?.successMsg
-        } catch (error) {
+        } catch (error: any) {
             console.log(error);
-            return
+            return error.response.data
         }
     })
 
@@ -53,9 +53,9 @@ export const fetchDeleteItem = createAsyncThunk('./fetchDeleteItem',
         try {
             let rs = await deleteTodoItem({ id: data.id })
             if (rs) return rs.data?.successMsg
-        } catch (error) {
+        } catch (error: any) {
             console.log(error);
-            return
+            return error.response.data
         }
     })
 

@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Login",
+    "sid": "login",
+    "schema": [
+      {
+        "field": "email",
+        "name": "Email",
+        "type": "text",
+        "widget": "InputField",
+        "required": true
+      },
+      {
+        "field": "password",
+        "name": "Password",
+        "type": "password",
+        "widget": "InputField",
+        "required": true
+      }
+    ]
+  },
+  {
+    "name": "Sign Up",
+    "sid": "signup",
+    "schema": [
+      {
+        "field": "username",
+        "name": "Username",
+        "type": "text",
+        "widget": "InputField",
+        "required": true
+      },
+      {
+        "field": "email",
+        "name": "Email",
+        "type": "email",
+        "widget": "InputField",
+        "required": true
+      },
+      {
+        "field": "phone",
+        "name": "Phone",
+        "type": "text",
+        "widget": "InputField",
+        "required": true
+      },
+      {
+        "field": "password",
+        "name": "Password",
+        "type": "password",
+        "widget": "InputField",
+        "required": true
+      }
+    ]
+  }
+]

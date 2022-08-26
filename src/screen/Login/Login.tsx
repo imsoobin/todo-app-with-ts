@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import {
-  Box,
+  // Box,
   Button,
   FormControl,
-  FormLabel,
+  // FormLabel,
   Heading,
-  Input,
+  // Input,
   useToast,
 } from "@chakra-ui/react";
 import "./style.css";
-import { LoginState } from "../../model/type";
 import { useAppDispatch } from "../../hooks";
 import { fetchLogin } from "../../redux/reducer/accountSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import DATA from "../../common/const/PAGE.json";
+import Widget from "../../widgets";
 const Login: React.FC = () => {
   const toast_success = useToast({
     position: "top",
@@ -27,11 +28,13 @@ const Login: React.FC = () => {
   });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [account, setAccount] = useState<LoginState>();
+  const { login } = useParams<{ login: string }>();
+  const PAGE = DATA.find((fd) => fd.sid === login);
+  const [account, setAccount] = useState<Partial<any>>({});
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
-    setAccount((prev) => ({ ...prev, [name]: value }));
+    setAccount((prev: any) => ({ ...prev, [name]: value }));
   };
   const handleSubmitLogin = async (e: React.FormEvent) => {
     try {
@@ -42,7 +45,7 @@ const Login: React.FC = () => {
       if (rs?.payload?.email) {
         toast_success();
         navigate("/");
-        window.location.reload()
+        window.location.reload();
       } else {
         return toast_error({ title: rs?.payload });
       }
@@ -51,31 +54,22 @@ const Login: React.FC = () => {
       return;
     }
   };
+
   return (
     <form className="form__signup" onSubmit={handleSubmitLogin}>
       <FormControl isRequired width={"60%"}>
         <Heading>Form Login</Heading>
-        <Box>
-          <FormLabel className="form__label">Email</FormLabel>
-          <Input
-            autoComplete="off"
-            placeholder="Email"
-            value={account?.email}
-            name="email"
-            onChange={handleChange}
-          />
-        </Box>
-        <Box>
-          <FormLabel className="form__label">Password</FormLabel>
-          <Input
-            autoComplete="off"
-            placeholder="Password"
-            value={account?.password}
-            name="password"
-            onChange={handleChange}
-            type="password"
-          />
-        </Box>
+        {PAGE?.schema?.map((sch: Partial<any>, key: any) => {
+          const Item = Widget[sch.widget];
+          return (
+            <Item
+              schema={sch}
+              key={key}
+              value={account[sch?.field]}
+              onChange={handleChange}
+            />
+          );
+        })}
         <Button mt={4} colorScheme="teal" type="submit">
           Submit
         </Button>

@@ -1,5 +1,12 @@
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { Box, Flex, Heading, IconButton, Text, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  IconButton,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../hooks";
@@ -10,10 +17,8 @@ import {
   fetchDeleteItem,
 } from "../../redux/reducer/todoListSlice";
 const TodoInfo: React.FC<TodoState> = ({ title, author, id }) => {
-  const toast_success = useToast({
+  const toast = useToast({
     position: "top",
-    title: "Successful",
-    status: "success",
     duration: 1500,
   });
   const dispatch = useAppDispatch();
@@ -23,10 +28,11 @@ const TodoInfo: React.FC<TodoState> = ({ title, author, id }) => {
   };
   const handleDelteItem = async () => {
     let rs: any = await dispatch(fetchDeleteItem({ id: id }));
-    if (rs) {
-      dispatch(fetchDataTodo());
-      toast_success();
-    }
+
+    if (rs?.payload === "Success") {
+      await dispatch(fetchDataTodo());
+      toast({ status: "success", title: "Success" });
+    } else return toast({ status: "error", title: rs?.payload });
   };
   return (
     <Flex p={5} justifyContent="space-between" shadow="md" borderWidth="1px">
