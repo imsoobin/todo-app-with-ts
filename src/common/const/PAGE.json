@@ -6,7 +6,7 @@
       {
         "field": "email",
         "name": "Email",
-        "type": "text",
+        "type": "email",
         "widget": "InputField",
         "required": true
       },

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Heading, Button, FormControl, useToast } from "@chakra-ui/react";
-import "./style.css";
-import { useAppDispatch } from "../../hooks";
 import { fetchSubmit } from "../../redux/reducer/accountSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import DATA from "../../common/const/PAGE.json";
+import { useAppDispatch } from "../../hooks";
 import Widget from "../../widgets";
 import "./style.css";
+
 const SubmitForm: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -18,11 +18,13 @@ const SubmitForm: React.FC = () => {
     position: "top",
     duration: 1000,
   });
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
     setSubmit((prev: any) => ({ ...prev, [name]: value }));
   };
+  
   const handleSubmit = async (e: React.FormEvent) => {
     try {
       e.preventDefault();
@@ -46,6 +48,7 @@ const SubmitForm: React.FC = () => {
       return;
     }
   };
+
   const renderBtn = () => {
     return (
       <>
@@ -63,6 +66,7 @@ const SubmitForm: React.FC = () => {
       </>
     );
   };
+
   return (
     <form className="form__signup">
       <FormControl isRequired width={"60%"}>
@@ -83,4 +87,5 @@ const SubmitForm: React.FC = () => {
     </form>
   );
 };
+
 export default SubmitForm;
