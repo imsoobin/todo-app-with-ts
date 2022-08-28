@@ -1,6 +1,6 @@
 [
   {
-    "name": "Login",
+    "name": "Login Form",
     "sid": "login",
     "schema": [
       {
@@ -16,6 +16,24 @@
         "type": "password",
         "widget": "InputField",
         "required": true
+      }
+    ],
+    "button": [
+      {
+        "name": "Login",
+        "action": "api",
+        "position": "form",
+        "api": {
+          "name": "loginAccount"
+        }
+      }
+    ],
+    "api":[
+      {
+        "navigate": "login",
+        "name": "loginAccount",
+        "url": "/DUser/login",
+        "method": "POST"
       }
     ]
   },
@@ -50,6 +68,24 @@
         "type": "password",
         "widget": "InputField",
         "required": true
+      }
+    ],
+    "button": [
+      {
+        "name": "Sign Up",
+        "action": "api",
+        "position": "form",
+        "api": {
+          "name": "signUpAccount"
+        }
+      }
+    ],
+    "api":[
+      {
+        "navigate": "signUp",
+        "name": "signUpAccount",
+        "url": "/DUser/signUp",
+        "method": "POST"
       }
     ]
   }
