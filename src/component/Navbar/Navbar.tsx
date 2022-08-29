@@ -57,30 +57,6 @@ const Navbar = () => {
         </Link>
       </Box>
       <Box>
-        {/* <Link to="/">
-          <Button
-            fontWeight={["medium", "medium", "medium"]}
-            fontSize={["xs", "sm", "lg", "xl"]}
-            variant="ghost"
-            _hover={{ bg: "rgba(0,0,0,.2)" }}
-            p={[1, 4]}
-            color="white"
-          >
-            Show todo list
-          </Button>
-        </Link> */}
-        {/* <Link to="/add">
-          <Button
-            fontWeight={["medium", "medium", "medium"]}
-            fontSize={["xs", "sm", "lg", "xl"]}
-            variant="ghost"
-            _hover={{ bg: "rgba(0,0,0,.2)" }}
-            p={[1, 4]}
-            color="white"
-          >
-            Add todo
-          </Button>
-        </Link> */}
         {isAccount ? (
           <Menu>
             <MenuButton>

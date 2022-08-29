@@ -1,8 +1,8 @@
-import { Box, Button, Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import React, { useEffect } from "react";
+import { Box, Button, Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { fetchDataTodo } from "../../redux/reducer/todoListSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/hook";
+import { fetchDataTodo } from "../../redux/reducer";
 import TodoInfo from "../TodoInfo";
 const TodoList: React.FC = () => {
   const dispatch = useAppDispatch();

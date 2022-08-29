@@ -10,30 +10,19 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/hook";
 import {
-  // addTodoItem,
-  // updateTodoItem,
   fetchAddItem,
   fetchDataTodo,
   fetchUpdateItem,
-} from "../../redux/reducer/todoListSlice";
+} from "../../redux/reducer";
 import { Link } from "react-router-dom";
-// import { v4 as uuidv4 } from "uuid";
 
 const AddTodo: React.FC = () => {
-  const toast_success = useToast({
+  const toast = useToast({
     position: "top",
-    title: "Successful",
-    status: "success",
     duration: 1000,
   });
-  const toast_error = useToast({
-    position: "top",
-    status: "error",
-    duration: 2000,
-  });
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
@@ -48,12 +37,11 @@ const AddTodo: React.FC = () => {
   );
 
   const handleUpdateTodoItem = async () => {
-    // dispatch(updateTodoItem({ id: id!, title, author }));
     let rs: any = await dispatch(fetchUpdateItem({ id: id!, title, author }));
     if (rs?.payload === "Success") {
       dispatch(fetchDataTodo());
-      toast_success();
-    } else toast_error({ title: rs?.payload });
+      toast({ status: "success", title: "Sccuess" });
+    } else toast({ status: "error", title: rs?.payload });
 
     setTitle("");
     setAuthor("");
@@ -64,12 +52,11 @@ const AddTodo: React.FC = () => {
       handleUpdateTodoItem();
       return;
     }
-    // dispatch(addTodoItem({ title, author, id: uuidv4() }));
     let rs: any = await dispatch(fetchAddItem({ title, author }));
     if (rs?.payload === "Success") {
       dispatch(fetchDataTodo());
-      toast_success();
-    } else toast_error({ title: rs?.payload });
+      toast({ status: "success", title: "Sccuess" });
+    } else toast({ status: "error", title: rs?.payload });
 
     setTitle("");
     setAuthor("");

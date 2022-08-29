@@ -9,13 +9,9 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../hooks";
+import { useAppDispatch } from "../../hooks/hook";
 import { TodoState } from "../../model/type";
-import {
-  // deleteTodoItem,
-  fetchDataTodo,
-  fetchDeleteItem,
-} from "../../redux/reducer/todoListSlice";
+import { fetchDataTodo, fetchDeleteItem } from "../../redux/reducer";
 const TodoInfo: React.FC<TodoState> = ({ title, author, id }) => {
   const toast = useToast({
     position: "top",
@@ -28,7 +24,6 @@ const TodoInfo: React.FC<TodoState> = ({ title, author, id }) => {
   };
   const handleDelteItem = async () => {
     let rs: any = await dispatch(fetchDeleteItem({ id: id }));
-
     if (rs?.payload === "Success") {
       await dispatch(fetchDataTodo());
       toast({ status: "success", title: "Success" });

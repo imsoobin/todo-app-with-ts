@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-const Loader = () => {
+const Loader:React.FC = () => {
   return (
     <div className="loader">
       <div className="col-sm-6 text-center">

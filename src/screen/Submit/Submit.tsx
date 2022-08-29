@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Heading, Button, FormControl, useToast } from "@chakra-ui/react";
-import { fetchSubmit } from "../../redux/reducer/accountSlice";
+import { fetchSubmit } from "../../redux/reducer";
 import { useNavigate, useParams } from "react-router-dom";
 import DATA from "../../common/const/PAGE.json";
-import { useAppDispatch } from "../../hooks";
+import { useAppDispatch } from "../../hooks/hook";
 import Widget from "../../widgets";
 import "./style.css";
 
@@ -53,13 +53,7 @@ const SubmitForm: React.FC = () => {
     return (
       <>
         {PAGE?.button?.map((btn, idx) => (
-          <Button
-            mt={4}
-            colorScheme="teal"
-            type="submit"
-            key={idx}
-            onClick={handleSubmit}
-          >
+          <Button mt={4} colorScheme="teal" type="submit" key={idx}>
             {btn?.name}
           </Button>
         ))}
@@ -68,10 +62,10 @@ const SubmitForm: React.FC = () => {
   };
 
   return (
-    <form className="form__signup">
+    <form className="form__signup" onSubmit={handleSubmit}>
       <FormControl isRequired width={"60%"}>
         <Heading>{PAGE?.name}</Heading>
-        {PAGE?.schema?.map((sch: Partial<any>, key: any) => {
+        {PAGE?.schema?.map((sch: Partial<any>, key: number) => {
           const Item = Widget[sch.widget];
           return (
             <Item
