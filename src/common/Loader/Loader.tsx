@@ -4,7 +4,7 @@ const Loader:React.FC = () => {
   return (
     <div className="loader">
       <div className="col-sm-6 text-center">
-        <p>loader 3</p>
+        <p className="loading">Loading...</p>
         <div className="loader3">
           <span></span>
           <span></span>

@@ -12,7 +12,6 @@ const SubmitForm: React.FC = () => {
   const dispatch = useAppDispatch();
   const { query } = useParams<{ query: string }>();
   const PAGE = DATA.find((fd) => fd.sid === query);
-
   const [submit, setSubmit] = useState<Partial<any>>({});
   const toast = useToast({
     position: "top",
@@ -22,7 +21,7 @@ const SubmitForm: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
-    setSubmit((prev: any) => ({ ...prev, [name]: value }));
+    setSubmit((prev) => ({ ...prev, [name]: value }));
   };
   
   const handleSubmit = async (e: React.FormEvent) => {
